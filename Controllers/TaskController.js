@@ -24,3 +24,13 @@ res.status(201).json(savedTask);
 next(err);
 }
 };
+
+// Get all tasks
+const getTasks = async (req, res, next) => {
+try {
+const tasks = await Task.find().sort({ createdAt: -1 });
+res.json(tasks);
+} catch (err) {
+next(err);
+}
+};
