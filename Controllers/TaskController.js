@@ -34,3 +34,15 @@ res.json(tasks);
 next(err);
 }
 };
+
+// Get a task by ID
+const getTaskById = async (req, res, next) => {
+try {
+const { id } = req.params;
+const task = await Task.findById(id);
+if (!task) return res.status(404).json({ error: 'Task not found' });
+res.json(task);
+} catch (err) {
+next(err);
+}
+};
