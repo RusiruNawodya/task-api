@@ -46,3 +46,22 @@ res.json(task);
 next(err);
 }
 };
+
+// Delete a task by ID
+const deleteTask = async (req, res, next) => {
+try {
+const { id } = req.params;
+const task = await Task.findByIdAndDelete(id);
+if (!task) return res.status(404).json({ error: 'Task not found' });
+res.json({ message: 'Task deleted successfully' });
+} catch (err) {
+next(err);
+}
+};
+
+module.exports = {
+    createTask,
+    getTasks,
+    getTaskById,
+    deleteTask
+}
